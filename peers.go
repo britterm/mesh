@@ -363,10 +363,6 @@ func (peers *Peers) applyUpdate(update []byte) (peerNameSet, peerNameSet, error)
 
 	// Now apply the updates
 	newUpdate := peers.applyDecodedUpdate(decodedUpdate, decodedConns, &pending)
-	peers.garbageCollect(&pending)
-	for _, peerRemoved := range pending.removed {
-		delete(newUpdate, peerRemoved.Name)
-	}
 
 	updateNames := make(peerNameSet)
 	for _, peer := range decodedUpdate {
